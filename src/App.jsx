@@ -22,7 +22,7 @@ function App() {
       {/* SECTION 1: HERO */}
       <section className="min-h-screen flex flex-col justify-center items-center px-6 md:px-12 relative">
         {/* Celestial background elements */}
-        <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-white/20 rounded-full animate-pulse"></div>
           <div className="absolute top-1/3 right-1/3 w-0.5 h-0.5 bg-white/30 rounded-full animate-pulse delay-300"></div>
           <div className="absolute top-2/3 left-1/3 w-0.5 h-0.5 bg-white/20 rounded-full animate-pulse delay-700"></div>
@@ -39,7 +39,7 @@ function App() {
           <em className="italic text-white/60">reality waiting to be born</em>
         </h1>
         
-        <div className="flex flex-col sm:flex-row gap-4 mt-12">
+        <div className="flex flex-col sm:flex-row gap-4 mt-12 relative z-10">
           <a 
             href="#waitlist" 
             className="group flex items-center justify-center gap-3 bg-white/[0.03] border border-white/10 px-8 py-4 hover:bg-white/[0.06] hover:border-white/20 transition-all duration-500"
