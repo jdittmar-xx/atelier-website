@@ -156,8 +156,17 @@ function App() {
           
           <div className="grid md:grid-cols-3 gap-px bg-white/5">
             <div className="bg-black p-10 md:p-12">
-              <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center mb-8">
-                <span className="text-white/40">✦</span>
+              {/* Seeds: sprouting/emerging graphic */}
+              <div className="w-16 h-16 mb-8 relative">
+                <svg viewBox="0 0 64 64" fill="none" className="w-full h-full">
+                  <circle cx="32" cy="48" r="6" stroke="currentColor" strokeWidth="1" className="text-white/20" />
+                  <path d="M32 42 L32 24" stroke="currentColor" strokeWidth="1" className="text-white/30" />
+                  <path d="M32 24 Q24 20 20 12" stroke="currentColor" strokeWidth="1" className="text-white/20" fill="none" />
+                  <path d="M32 24 Q40 20 44 12" stroke="currentColor" strokeWidth="1" className="text-white/20" fill="none" />
+                  <circle cx="20" cy="12" r="2" fill="currentColor" className="text-white/30" />
+                  <circle cx="44" cy="12" r="2" fill="currentColor" className="text-white/30" />
+                  <circle cx="32" cy="24" r="3" fill="currentColor" className="text-white/20" />
+                </svg>
               </div>
               <h3 className="font-serif text-2xl text-white/70 mb-4">Seeds</h3>
               <p className="text-white/30 font-light leading-relaxed">
@@ -166,8 +175,17 @@ function App() {
             </div>
             
             <div className="bg-black p-10 md:p-12">
-              <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center mb-8">
-                <span className="text-white/40">◯</span>
+              {/* Atelier: focused workspace/portal graphic */}
+              <div className="w-16 h-16 mb-8 relative">
+                <svg viewBox="0 0 64 64" fill="none" className="w-full h-full">
+                  <rect x="12" y="12" width="40" height="40" stroke="currentColor" strokeWidth="1" className="text-white/15" />
+                  <rect x="20" y="20" width="24" height="24" stroke="currentColor" strokeWidth="1" className="text-white/20" />
+                  <rect x="28" y="28" width="8" height="8" fill="currentColor" className="text-white/30" />
+                  <line x1="32" y1="4" x2="32" y2="12" stroke="currentColor" strokeWidth="1" className="text-white/10" />
+                  <line x1="32" y1="52" x2="32" y2="60" stroke="currentColor" strokeWidth="1" className="text-white/10" />
+                  <line x1="4" y1="32" x2="12" y2="32" stroke="currentColor" strokeWidth="1" className="text-white/10" />
+                  <line x1="52" y1="32" x2="60" y2="32" stroke="currentColor" strokeWidth="1" className="text-white/10" />
+                </svg>
               </div>
               <h3 className="font-serif text-2xl text-white/70 mb-4">The Atelier</h3>
               <p className="text-white/30 font-light leading-relaxed">
@@ -176,8 +194,24 @@ function App() {
             </div>
             
             <div className="bg-black p-10 md:p-12">
-              <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center mb-8">
-                <span className="text-white/40">◈</span>
+              {/* Worlds: constellation/universe graphic */}
+              <div className="w-16 h-16 mb-8 relative">
+                <svg viewBox="0 0 64 64" fill="none" className="w-full h-full">
+                  <circle cx="32" cy="32" r="8" stroke="currentColor" strokeWidth="1" className="text-white/25" />
+                  <circle cx="32" cy="32" r="2" fill="currentColor" className="text-white/40" />
+                  <circle cx="12" cy="16" r="4" stroke="currentColor" strokeWidth="1" className="text-white/15" />
+                  <circle cx="12" cy="16" r="1.5" fill="currentColor" className="text-white/25" />
+                  <circle cx="52" cy="20" r="3" stroke="currentColor" strokeWidth="1" className="text-white/15" />
+                  <circle cx="52" cy="20" r="1" fill="currentColor" className="text-white/25" />
+                  <circle cx="16" cy="52" r="3" stroke="currentColor" strokeWidth="1" className="text-white/15" />
+                  <circle cx="16" cy="52" r="1" fill="currentColor" className="text-white/25" />
+                  <circle cx="50" cy="48" r="4" stroke="currentColor" strokeWidth="1" className="text-white/15" />
+                  <circle cx="50" cy="48" r="1.5" fill="currentColor" className="text-white/25" />
+                  <line x1="24" y1="28" x2="15" y2="19" stroke="currentColor" strokeWidth="0.5" className="text-white/10" />
+                  <line x1="40" y1="28" x2="49" y2="22" stroke="currentColor" strokeWidth="0.5" className="text-white/10" />
+                  <line x1="26" y1="38" x2="18" y2="49" stroke="currentColor" strokeWidth="0.5" className="text-white/10" />
+                  <line x1="38" y1="38" x2="47" y2="46" stroke="currentColor" strokeWidth="0.5" className="text-white/10" />
+                </svg>
               </div>
               <h3 className="font-serif text-2xl text-white/70 mb-4">Worlds</h3>
               <p className="text-white/30 font-light leading-relaxed">
