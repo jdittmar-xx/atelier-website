@@ -172,7 +172,7 @@ function App() {
           
           <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl text-white/70 mb-8 leading-[1.15]">
             The Personal<br />
-            <em className="italic text-white/40">Universe Engineer</em>
+            <em className="italic text-white/40">Universe Engine</em>
           </h2>
           
           <p className="text-white/30 font-light text-lg mb-20 max-w-xl">
