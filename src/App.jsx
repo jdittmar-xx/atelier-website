@@ -114,14 +114,39 @@ function App() {
           
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             <div className="border border-white/5 p-8 hover:border-white/10 transition-colors duration-500">
+              <div className="w-10 h-10 mb-6">
+                <svg viewBox="0 0 40 40" fill="none" className="w-full h-full">
+                  <circle cx="20" cy="20" r="12" stroke="currentColor" strokeWidth="1" className="text-white/15" strokeDasharray="4 3" />
+                  <path d="M20 8 L20 5 L23 8" stroke="currentColor" strokeWidth="1" className="text-white/30" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M20 32 L20 35 L17 32" stroke="currentColor" strokeWidth="1" className="text-white/30" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                  <circle cx="20" cy="20" r="2" fill="currentColor" className="text-white/25" />
+                </svg>
+              </div>
               <p className="text-white/50 text-sm mb-3">They trap you in</p>
               <p className="font-serif text-xl text-white/70">Decision loops</p>
             </div>
             <div className="border border-white/5 p-8 hover:border-white/10 transition-colors duration-500">
+              <div className="w-10 h-10 mb-6">
+                <svg viewBox="0 0 40 40" fill="none" className="w-full h-full">
+                  <rect x="12" y="8" width="16" height="24" rx="2" stroke="currentColor" strokeWidth="1" className="text-white/15" />
+                  <rect x="14" y="18" width="12" height="12" fill="currentColor" className="text-white/10" />
+                  <line x1="20" y1="32" x2="20" y2="38" stroke="currentColor" strokeWidth="1" className="text-white/25" strokeDasharray="2 2" />
+                  <circle cx="20" cy="13" r="2" stroke="currentColor" strokeWidth="1" className="text-white/30" />
+                </svg>
+              </div>
               <p className="text-white/50 text-sm mb-3">They drain you with</p>
               <p className="font-serif text-xl text-white/70">Cognitive fatigue</p>
             </div>
             <div className="border border-white/5 p-8 hover:border-white/10 transition-colors duration-500">
+              <div className="w-10 h-10 mb-6">
+                <svg viewBox="0 0 40 40" fill="none" className="w-full h-full">
+                  <rect x="8" y="28" width="24" height="4" stroke="currentColor" strokeWidth="1" className="text-white/15" />
+                  <rect x="10" y="22" width="20" height="4" stroke="currentColor" strokeWidth="1" className="text-white/15" />
+                  <rect x="12" y="16" width="16" height="4" stroke="currentColor" strokeWidth="1" className="text-white/20" />
+                  <rect x="14" y="10" width="12" height="4" stroke="currentColor" strokeWidth="1" className="text-white/25" />
+                  <rect x="16" y="4" width="8" height="4" stroke="currentColor" strokeWidth="1" className="text-white/30" />
+                </svg>
+              </div>
               <p className="text-white/50 text-sm mb-3">They bury you under</p>
               <p className="font-serif text-xl text-white/70">Infinite consumption</p>
             </div>
