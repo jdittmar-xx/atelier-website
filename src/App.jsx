@@ -13,7 +13,7 @@ function App() {
         </a>
         <a 
           href="#waitlist" 
-          className="text-xs tracking-[0.2em] uppercase text-white/40 hover:text-white/70 transition-colors"
+          className="mono-caps text-xs text-white/40 hover:text-white/70 transition-colors"
         >
           Join Waitlist
         </a>
@@ -30,7 +30,7 @@ function App() {
           <div className="absolute top-1/2 right-1/5 w-0.5 h-0.5 bg-white/20 rounded-full animate-pulse delay-1000"></div>
         </div>
         
-        <p className="text-[10px] md:text-xs tracking-[0.5em] text-white/25 uppercase mb-10 text-center">
+        <p className="mono-caps text-[10px] md:text-xs text-white/25 mb-10 text-center">
           A tool for thinkers who build with taste
         </p>
         
@@ -48,13 +48,13 @@ function App() {
             href="#waitlist" 
             className="group flex items-center justify-center gap-3 bg-white/[0.03] border border-white/10 px-8 py-4 hover:bg-white/[0.06] hover:border-white/20 transition-all duration-500"
           >
-            <span className="text-xs tracking-[0.2em] uppercase text-white/60 group-hover:text-white/80">Join the Waitlist</span>
+            <span className="mono-caps text-xs text-white/60 group-hover:text-white/80">Join the Waitlist</span>
           </a>
           <a 
             href="#mechanism" 
             className="group flex items-center justify-center gap-2 px-8 py-4 text-white/30 hover:text-white/50 transition-all duration-500"
           >
-            <span className="text-xs tracking-[0.15em] uppercase">Explore</span>
+            <span className="mono-caps text-xs">Explore</span>
             <span className="group-hover:translate-y-1 transition-transform duration-300">↓</span>
           </a>
         </div>
@@ -63,7 +63,7 @@ function App() {
       {/* SECTION 2: THE PROBLEM */}
       <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 py-32 border-t border-white/5">
         <div className="max-w-5xl mx-auto">
-          <p className="text-[10px] tracking-[0.5em] text-white/20 uppercase mb-6">
+          <p className="mono-caps text-[10px] text-white/20 mb-6">
             The Problem
           </p>
           
@@ -103,7 +103,7 @@ function App() {
       {/* SECTION 3: THE INSIGHT */}
       <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 py-32 border-t border-white/5">
         <div className="max-w-5xl mx-auto">
-          <p className="text-[10px] tracking-[0.5em] text-white/20 uppercase mb-6">
+          <p className="mono-caps text-[10px] text-white/20 mb-6">
             The Insight
           </p>
           
@@ -141,7 +141,7 @@ function App() {
       {/* SECTION 4: THE MECHANISM */}
       <section id="mechanism" className="min-h-screen flex flex-col justify-center px-6 md:px-12 py-32 border-t border-white/5">
         <div className="max-w-5xl mx-auto">
-          <p className="text-[10px] tracking-[0.5em] text-white/20 uppercase mb-6">
+          <p className="mono-caps text-[10px] text-white/20 mb-6">
             The Mechanism
           </p>
           
@@ -195,7 +195,7 @@ function App() {
       {/* SECTION 5: THE EXPERIENCE */}
       <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 py-32 border-t border-white/5">
         <div className="max-w-5xl mx-auto">
-          <p className="text-[10px] tracking-[0.5em] text-white/20 uppercase mb-6">
+          <p className="mono-caps text-[10px] text-white/20 mb-6">
             The Experience
           </p>
           
@@ -206,7 +206,7 @@ function App() {
           
           <div className="grid md:grid-cols-3 gap-12 md:gap-8">
             <div className="text-center">
-              <p className="text-[10px] tracking-[0.4em] text-white/20 uppercase mb-6">Morning</p>
+              <p className="mono-caps text-[10px] text-white/20 mb-6">Morning</p>
               <p className="font-serif text-2xl text-white/60 mb-4 italic">"Let the light fade in"</p>
               <p className="text-white/25 font-light text-sm leading-relaxed">
                 Open session prompt. Set intention. Begin.
@@ -214,7 +214,7 @@ function App() {
             </div>
             
             <div className="text-center">
-              <p className="text-[10px] tracking-[0.4em] text-white/20 uppercase mb-6">Deep Work</p>
+              <p className="mono-caps text-[10px] text-white/20 mb-6">Deep Work</p>
               <p className="font-serif text-2xl text-white/60 mb-4 italic">"The world fades out"</p>
               <p className="text-white/25 font-light text-sm leading-relaxed">
                 All distractions disappear. Only the edge of creation exists.
@@ -222,7 +222,7 @@ function App() {
             </div>
             
             <div className="text-center">
-              <p className="text-[10px] tracking-[0.4em] text-white/20 uppercase mb-6">Evening</p>
+              <p className="mono-caps text-[10px] text-white/20 mb-6">Evening</p>
               <p className="font-serif text-2xl text-white/60 mb-4 italic">"Ideas you created today"</p>
               <p className="text-white/25 font-light text-sm leading-relaxed">
                 Integration, not accumulation. See what you built.
@@ -241,7 +241,7 @@ function App() {
       {/* SECTION 6: WHO IT'S FOR */}
       <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 py-32 border-t border-white/5">
         <div className="max-w-5xl mx-auto">
-          <p className="text-[10px] tracking-[0.5em] text-white/20 uppercase mb-6">
+          <p className="mono-caps text-[10px] text-white/20 mb-6">
             Who It's For
           </p>
           
@@ -285,7 +285,7 @@ function App() {
       {/* SECTION 7: THE PHILOSOPHY */}
       <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 py-32 border-t border-white/5">
         <div className="max-w-5xl mx-auto">
-          <p className="text-[10px] tracking-[0.5em] text-white/20 uppercase mb-6">
+          <p className="mono-caps text-[10px] text-white/20 mb-6">
             The Philosophy
           </p>
           
@@ -319,7 +319,7 @@ function App() {
       {/* SECTION 8: FOUNDER STORY */}
       <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 py-32 border-t border-white/5">
         <div className="max-w-4xl mx-auto">
-          <p className="text-[10px] tracking-[0.5em] text-white/20 uppercase mb-6">
+          <p className="mono-caps text-[10px] text-white/20 mb-6">
             Origin
           </p>
           
@@ -351,7 +351,7 @@ function App() {
       {/* SECTION 9: SOCIAL PROOF */}
       <section className="py-32 px-6 md:px-12 border-t border-white/5">
         <div className="max-w-5xl mx-auto text-center">
-          <p className="text-[10px] tracking-[0.5em] text-white/20 uppercase mb-6">
+          <p className="mono-caps text-[10px] text-white/20 mb-6">
             Early Signal
           </p>
           
@@ -368,7 +368,7 @@ function App() {
       {/* SECTION 10: THE OFFER / CTA */}
       <section id="waitlist" className="min-h-screen flex flex-col justify-center items-center px-6 md:px-12 py-32 border-t border-white/5">
         <div className="max-w-2xl mx-auto text-center">
-          <p className="text-[10px] tracking-[0.5em] text-white/20 uppercase mb-6">
+          <p className="mono-caps text-[10px] text-white/20 mb-6">
             Enter
           </p>
           
@@ -391,7 +391,7 @@ function App() {
             />
             <button 
               type="submit"
-              className="bg-white/[0.05] border border-white/10 px-8 py-4 text-white/60 hover:bg-white/[0.08] hover:text-white/80 transition-all duration-300 text-xs tracking-[0.2em] uppercase"
+              className="mono-caps bg-white/[0.05] border border-white/10 px-8 py-4 text-white/60 hover:bg-white/[0.08] hover:text-white/80 transition-all duration-300 text-xs"
             >
               Join
             </button>

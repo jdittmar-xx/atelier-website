@@ -25,6 +25,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Monospace for all-caps labels */
+.mono-caps {
+  font-family: 'SF Mono', 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Cormorant Garamond', Georgia, serif;
   font-weight: 300;
