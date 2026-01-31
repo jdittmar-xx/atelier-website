@@ -39,11 +39,7 @@ function App() {
           <em className="italic text-white/60">reality waiting to be born</em>
         </h1>
         
-        <p className="text-white/30 text-sm md:text-base font-light max-w-md text-center mb-12 leading-relaxed">
-          The curiosity engine for creators who refuse to let their ideas die.
-        </p>
-        
-        <div className="flex flex-col sm:flex-row gap-4">
+        <div className="flex flex-col sm:flex-row gap-4 mt-12">
           <a 
             href="#waitlist" 
             className="group flex items-center justify-center gap-3 bg-white/[0.03] border border-white/10 px-8 py-4 hover:bg-white/[0.06] hover:border-white/20 transition-all duration-500"
