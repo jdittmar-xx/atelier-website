@@ -1,13 +1,13 @@
 import { useState, useCallback, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { SectionMark } from './chrome.jsx';
+import { SectionMark, useMobile } from './chrome.jsx';
 
-function StillCard({ s, span }) {
+function StillCard({ s, span, isMobile }) {
   return (
     <figure style={{
       margin: 0,
-      gridColumn: `span ${span.c}`,
-      gridRow: `span ${span.r}`,
+      gridColumn: isMobile ? 'span 1' : `span ${span.c}`,
+      gridRow: isMobile ? 'span 1' : `span ${span.r}`,
       position: 'relative', overflow: 'hidden',
       background: '#000', border: '1px solid var(--ink-3)',
     }}>
@@ -49,12 +49,13 @@ const STILLS_LAYOUT = [
 ];
 
 export function Stills({ stills, overlays }) {
+  const isMobile = useMobile();
   const [filter, setFilter] = useState('ALL');
   const tags = ['ALL', ...Array.from(new Set(stills.map((s) => s.tag).filter(Boolean)))];
   const visible = filter === 'ALL' ? stills : stills.filter((s) => s.tag === filter);
 
   return (
-    <section id="stills" style={{ padding: '192px 48px 0', maxWidth: 1600, margin: '0 auto' }}>
+    <section id="stills" style={{ padding: isMobile ? '96px 20px 0' : '192px 48px 0', maxWidth: 1600, margin: '0 auto' }}>
       <SectionMark
         num="04" label="STILLS — PHOTOGRAPHY"
         title="Frames that" italic="never moved."
@@ -84,11 +85,11 @@ export function Stills({ stills, overlays }) {
       </div>
 
       <div style={{
-        display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)',
-        gridAutoRows: '110px', gap: 12,
+        display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(12, 1fr)',
+        gridAutoRows: isMobile ? '140px' : '110px', gap: isMobile ? 8 : 12,
       }}>
         {visible.map((s, i) => (
-          <StillCard key={s.src} s={s} span={STILLS_LAYOUT[i % STILLS_LAYOUT.length]} />
+          <StillCard key={s.src} s={s} span={STILLS_LAYOUT[i % STILLS_LAYOUT.length]} isMobile={isMobile} />
         ))}
       </div>
     </section>
@@ -96,9 +97,10 @@ export function Stills({ stills, overlays }) {
 }
 
 export function Clients({ clients, overlays }) {
+  const isMobile = useMobile();
   const rows = [...clients].sort((a, b) => b.year.localeCompare(a.year));
   return (
-    <section id="clients" style={{ padding: '192px 48px 0', maxWidth: 1400, margin: '0 auto' }}>
+    <section id="clients" style={{ padding: isMobile ? '96px 20px 0' : '192px 48px 0', maxWidth: 1400, margin: '0 auto' }}>
       <SectionMark
         num="05" label="CLIENTS — SELECTED"
         title="Select" italic="clients."
@@ -106,12 +108,12 @@ export function Clients({ clients, overlays }) {
         overlays={overlays} />
 
       <div className="mono" style={{
-        display: 'grid', gridTemplateColumns: '80px 1fr 1fr 100px',
-        gap: 32, padding: '0 8px 12px',
+        display: 'grid', gridTemplateColumns: isMobile ? '44px 1fr 44px' : '80px 1fr 1fr 100px',
+        gap: isMobile ? 16 : 32, padding: '0 8px 12px',
         fontSize: 10, color: 'var(--fg-4)', letterSpacing: '0.14em',
         borderBottom: '1px solid var(--ink-4)',
       }}>
-        <span>NO.</span><span>NAME</span><span>SECTOR</span>
+        <span>NO.</span><span>NAME</span>{!isMobile && <span>SECTOR</span>}
         <span style={{ textAlign: 'right' }}>YEAR</span>
       </div>
 
@@ -121,8 +123,8 @@ export function Clients({ clients, overlays }) {
         const tagProps = hasLink ? { href: c.url, target: '_blank', rel: 'noopener noreferrer' } : {};
         return (
           <Tag key={c.name} {...tagProps} style={{
-            display: 'grid', gridTemplateColumns: '80px 1fr 1fr 100px',
-            gap: 32, padding: '24px 8px',
+            display: 'grid', gridTemplateColumns: isMobile ? '44px 1fr 44px' : '80px 1fr 1fr 100px',
+            gap: isMobile ? 16 : 32, padding: '24px 8px',
             borderBottom: '1px solid var(--ink-4)',
             alignItems: 'center',
             transition: 'background 200ms var(--ease-cine)',
@@ -141,7 +143,7 @@ export function Clients({ clients, overlays }) {
               {c.name}
               {hasLink && <span className="mono" style={{ fontSize: 11, color: 'var(--fg-4)', letterSpacing: 0 }}>↗</span>}
             </span>
-            <span className="mono" style={{ fontSize: 11, color: 'var(--fg-3)' }}>{c.sector}</span>
+            {!isMobile && <span className="mono" style={{ fontSize: 11, color: 'var(--fg-3)' }}>{c.sector}</span>}
             <span className="mono" style={{ fontSize: 11, color: 'var(--fg-4)', textAlign: 'right' }}>{c.year}</span>
           </Tag>
         );
@@ -151,8 +153,9 @@ export function Clients({ clients, overlays }) {
 }
 
 export function About({ about, overlays }) {
+  const isMobile = useMobile();
   return (
-    <section id="about" style={{ padding: '192px 48px 0', maxWidth: 1400, margin: '0 auto' }}>
+    <section id="about" style={{ padding: isMobile ? '96px 20px 0' : '192px 48px 0', maxWidth: 1400, margin: '0 auto' }}>
       <SectionMark
         num="06" label="MY STORY · ON RECORD"
         title="The story," italic="in full."
@@ -160,7 +163,7 @@ export function About({ about, overlays }) {
         overlays={overlays} />
 
       {/* (I) WHO I AM */}
-      <div style={{ display: 'grid', gridTemplateColumns: '0.85fr 1.15fr', gap: 64, marginBottom: 96 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '0.85fr 1.15fr', gap: isMobile ? 32 : 64, marginBottom: 96 }}>
         <div style={{ position: 'relative' }}>
           <div style={{
             position: 'relative', aspectRatio: '4/5', background: '#000',
@@ -229,7 +232,7 @@ export function About({ about, overlays }) {
 
       {/* Stats */}
       <div style={{
-        display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 0,
+        display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)', gap: 0,
         borderTop: '1px solid var(--ink-4)', borderBottom: '1px solid var(--ink-4)',
         marginBottom: 96,
       }}>
@@ -259,7 +262,7 @@ export function About({ about, overlays }) {
           <span>HOW I GOT HERE</span>
           <span style={{ flex: 1, height: 1, background: 'var(--ink-4)' }} />
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: 32, alignItems: 'start' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '200px 1fr', gap: 32, alignItems: 'start' }}>
           <div className="mono" style={{
             fontSize: 10.5, color: 'var(--fg-4)', letterSpacing: '0.14em', paddingTop: 6, lineHeight: 1.6,
           }}>
@@ -339,14 +342,14 @@ export function About({ about, overlays }) {
       </div>
 
       {/* Kit */}
-      <div style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: 32 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '200px 1fr', gap: 32 }}>
         <div className="mono" style={{ fontSize: 11, color: 'var(--fg-3)', letterSpacing: '0.14em' }}>
           (KIT · TYPICAL)
         </div>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           {about.kit.map(([k, v], i) => (
             <div key={k} style={{
-              display: 'grid', gridTemplateColumns: '160px 1fr',
+              display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '160px 1fr',
               padding: '20px 0',
               borderTop: i === 0 ? '1px solid var(--ink-4)' : 'none',
               borderBottom: '1px solid var(--ink-4)',
@@ -363,6 +366,7 @@ export function About({ about, overlays }) {
 }
 
 export function Contact({ identity, overlays }) {
+  const isMobile = useMobile();
   const [copied, setCopied] = useState(false);
   const [calendlyOpen, setCalendlyOpen] = useState(false);
 
@@ -389,7 +393,7 @@ export function Contact({ identity, overlays }) {
 
   return (
     <section id="contact" style={{
-      padding: '192px 48px 0', maxWidth: 1600, margin: '0 auto',
+      padding: isMobile ? '96px 20px 0' : '192px 48px 0', maxWidth: 1600, margin: '0 auto',
       textAlign: 'center', position: 'relative',
     }}>
       <div className="mono" style={{
@@ -406,7 +410,7 @@ export function Contact({ identity, overlays }) {
         <em style={{ color: 'var(--fg-2)' }}>something essential.</em>
       </h2>
 
-      <div style={{ marginTop: 56, display: 'inline-flex', alignItems: 'center', gap: 12 }}>
+      <div style={{ marginTop: 56, display: 'flex', flexDirection: isMobile ? 'column' : 'row', alignItems: 'center', gap: 12 }}>
         <button onClick={copyEmail} style={{
           padding: '18px 28px', background: 'transparent',
           color: 'var(--fg-1)', border: '1px solid var(--fg-3)', borderRadius: 999,
@@ -491,7 +495,7 @@ export function Contact({ identity, overlays }) {
       )}
 
       <div className="mono" style={{
-        marginTop: 80, display: 'flex', justifyContent: 'center', gap: 48,
+        marginTop: 80, display: 'flex', justifyContent: 'center', gap: isMobile ? 12 : 48, flexWrap: 'wrap',
         fontSize: 10.5, color: 'var(--fg-3)', letterSpacing: '0.14em',
       }}>
         <span>{identity.location}</span>
