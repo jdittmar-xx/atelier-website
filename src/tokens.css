@@ -1,0 +1,121 @@
+/* dittmar.works — Design tokens */
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@font-face {
+  font-family: 'HV Fitzgerald';
+  src: url('/fonts/HV_Fitzgerald_Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'HV Fitzgerald';
+  src: url('/fonts/HV_Fitzgerald_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SF Pro';
+  src: url('/fonts/SF-Pro.ttf') format('truetype-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --ink-0: #000000;
+  --ink-1: #060606;
+  --ink-2: #0c0c0c;
+  --ink-3: #141414;
+  --ink-4: #1c1c1c;
+  --ink-5: #2a2a2a;
+
+  --fg-1: #e8eaec;
+  --fg-2: #9aa0a6;
+  --fg-3: #5e6166;
+  --fg-4: #3a3c40;
+
+  --red:      #c83a3a;
+  --red-dim:  #7a2424;
+  --red-glow: rgba(200, 58, 58, 0.45);
+  --rec:      #c83a3a;
+  --okay:     #6b8a5a;
+
+  --font-serif:      'HV Fitzgerald', 'Times New Roman', serif;
+  --font-sans:       'SF Pro', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-compressed: 'SF Pro', 'Archivo Narrow', system-ui, sans-serif;
+  --font-mono:       'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --s-1:   4px;
+  --s-2:   8px;
+  --s-3:  12px;
+  --s-4:  16px;
+  --s-5:  24px;
+  --s-6:  32px;
+  --s-7:  48px;
+  --s-8:  64px;
+  --s-9:  96px;
+  --s-10: 128px;
+  --s-11: 192px;
+
+  --r-0: 0px;
+  --r-1: 4px;
+  --r-2: 8px;
+  --r-3: 14px;
+  --r-pill: 999px;
+
+  --ease-cine: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-in:  cubic-bezier(0.55, 0, 1, 0.45);
+  --ease-out: cubic-bezier(0, 0.55, 0.45, 1);
+
+  --section-pad-y: 192px;
+
+  --glass-bg:        rgba(12, 12, 12, 0.50);
+  --glass-bg-strong: rgba(12, 12, 12, 0.82);
+  --glass-border:    1px solid rgba(255, 255, 255, 0.08);
+
+  --scrim-top: linear-gradient(to bottom, rgba(0,0,0,0.72), transparent);
+}
+
+:root[data-theme="light"] {
+  --ink-0: #f4f1e9;
+  --ink-1: #ece7dc;
+  --ink-2: #e2dccd;
+  --ink-3: #d4ccba;
+  --ink-4: #c4b9a4;
+  --ink-5: #a89d86;
+
+  --fg-1: #19150f;
+  --fg-2: #4d473c;
+  --fg-3: #7f7768;
+  --fg-4: #b0a795;
+
+  --red:     #a82a2a;
+  --red-dim: #6b1c1c;
+  --red-glow: rgba(168, 42, 42, 0.32);
+  --rec: #a82a2a;
+
+  --glass-bg: rgba(255, 250, 240, 0.55);
+  --glass-bg-strong: rgba(255, 250, 240, 0.85);
+  --glass-border: 1px solid rgba(0, 0, 0, 0.10);
+  --scrim-top: linear-gradient(to bottom, rgba(244, 241, 233, 0.86), transparent);
+}
+
+:root[data-theme="light"] section#reel {
+  --ink-0: #000000;
+  --ink-1: #060606;
+  --ink-2: #0c0c0c;
+  --ink-3: #141414;
+  --ink-4: #1c1c1c;
+  --ink-5: #2a2a2a;
+  --fg-1: #e8eaec;
+  --fg-2: #9aa0a6;
+  --fg-3: #5e6166;
+  --fg-4: #3a3c40;
+  --red:     #c83a3a;
+  --red-dim: #7a2424;
+  --red-glow: rgba(200, 58, 58, 0.45);
+  --rec:     #c83a3a;
+}
