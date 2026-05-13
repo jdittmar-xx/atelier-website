@@ -330,7 +330,7 @@ export function Work({ films, overlays }) {
 
 export function Notes({ notes, overlays }) {
   return (
-    <section id="notes" style={{ padding: '192px 48px 0', maxWidth: 1400, margin: '0 auto' }}>
+    <section id="writing" style={{ padding: '192px 48px 0', maxWidth: 1400, margin: '0 auto' }}>
       <SectionMark
         num="03" label="NOTES — WRITING"
         title="Small signals," italic="written down."

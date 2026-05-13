@@ -56,7 +56,7 @@ export function Stills({ stills, overlays }) {
   return (
     <section id="stills" style={{ padding: '192px 48px 0', maxWidth: 1600, margin: '0 auto' }}>
       <SectionMark
-        num="03" label="STILLS — PHOTOGRAPHY"
+        num="04" label="STILLS — PHOTOGRAPHY"
         title="Frames that" italic="never moved."
         right={<>{stills.length} SELECTED FRAMES<br /><span style={{ color: 'var(--fg-1)' }}>FULL ARCHIVE ↗</span></>}
         overlays={overlays} />
@@ -100,7 +100,7 @@ export function Clients({ clients, overlays }) {
   return (
     <section id="clients" style={{ padding: '192px 48px 0', maxWidth: 1400, margin: '0 auto' }}>
       <SectionMark
-        num="04" label="CLIENTS — SELECTED"
+        num="05" label="CLIENTS — SELECTED"
         title="Select" italic="clients."
         right={<>{rows.length} ORGANIZATIONS<br /><span style={{ color: 'var(--fg-1)' }}>2024 — 2025</span></>}
         overlays={overlays} />
@@ -154,7 +154,7 @@ export function About({ about, overlays }) {
   return (
     <section id="about" style={{ padding: '192px 48px 0', maxWidth: 1400, margin: '0 auto' }}>
       <SectionMark
-        num="05" label="MY STORY · ON RECORD"
+        num="06" label="MY STORY · ON RECORD"
         title="The story," italic="in full."
         right={<>FIRST-PERSON<br /><span style={{ color: 'var(--fg-1)' }}>READ TIME · 3 MIN</span></>}
         overlays={overlays} />
