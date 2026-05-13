@@ -427,7 +427,7 @@ export function Notes({ notes: fallbackNotes, overlays }) {
             margin: 0, fontFamily: 'SF Pro, sans-serif', fontSize: 14,
             color: 'var(--fg-3)', lineHeight: 1.5, fontStyle: 'italic',
           }}>
-            Thoughts on taste, signal & leverage.
+            Essays on taste, signal, & leverage.
           </p>
         </div>
         <form onSubmit={handleSubscribe} style={{
