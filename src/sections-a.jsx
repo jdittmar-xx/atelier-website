@@ -344,7 +344,7 @@ export function Notes({ notes: fallbackNotes, overlays }) {
   const isMobile = useMobile();
   const [posts, setPosts] = useState(null);
   const [email, setEmail] = useState('');
-  const [subState, setSubState] = useState('idle'); // idle | sent
+  const [subState, setSubState] = useState('idle'); // idle | loading | done | error
 
   useEffect(() => {
     fetch('https://api.rss2json.com/v1/api.json?rss_url=https://dittmar.works/feed')
@@ -367,12 +367,27 @@ export function Notes({ notes: fallbackNotes, overlays }) {
 
   const displayNotes = posts || fallbackNotes;
 
-  const handleSubscribe = (e) => {
+  const handleSubscribe = async (e) => {
     e.preventDefault();
-    if (!email) return;
-    window.open(`https://dittmar.works/?email=${encodeURIComponent(email)}#subscribe`, '_blank');
-    setSubState('sent');
-    setTimeout(() => setSubState('idle'), 3000);
+    if (!email || subState === 'loading') return;
+    setSubState('loading');
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      if (res.ok) {
+        setSubState('done');
+        setEmail('');
+      } else {
+        setSubState('error');
+        setTimeout(() => setSubState('idle'), 3000);
+      }
+    } catch {
+      setSubState('error');
+      setTimeout(() => setSubState('idle'), 3000);
+    }
   };
 
   return (
@@ -412,7 +427,7 @@ export function Notes({ notes: fallbackNotes, overlays }) {
             margin: 0, fontFamily: 'SF Pro, sans-serif', fontSize: 14,
             color: 'var(--fg-3)', lineHeight: 1.5, fontStyle: 'italic',
           }}>
-            Essays on cinema, craft, and the work behind the work.
+            Thoughts on taste, signal & leverage.
           </p>
         </div>
         <form onSubmit={handleSubscribe} style={{
@@ -432,17 +447,18 @@ export function Notes({ notes: fallbackNotes, overlays }) {
               width: isMobile ? '100%' : undefined,
             }}
           />
-          <button type="submit" style={{
+          <button type="submit" disabled={subState === 'loading' || subState === 'done'} style={{
             padding: '14px 22px',
-            background: subState === 'sent' ? 'transparent' : 'var(--red)',
-            border: '1px solid var(--red)',
-            borderRadius: 999, color: 'var(--fg-1)', cursor: 'pointer',
+            background: subState === 'done' ? 'transparent' : subState === 'error' ? 'transparent' : 'var(--red)',
+            border: '1px solid ' + (subState === 'error' ? 'var(--fg-4)' : 'var(--red)'),
+            borderRadius: 999, color: subState === 'error' ? 'var(--fg-4)' : 'var(--fg-1)',
+            cursor: subState === 'loading' || subState === 'done' ? 'default' : 'pointer',
             fontFamily: 'JetBrains Mono, monospace', fontSize: 12,
             letterSpacing: '0.1em', textTransform: 'uppercase',
-            transition: 'opacity 240ms var(--ease-cine)',
-            whiteSpace: 'nowrap',
+            transition: 'all 240ms var(--ease-cine)',
+            whiteSpace: 'nowrap', opacity: subState === 'loading' ? 0.6 : 1,
           }}>
-            {subState === 'sent' ? 'OPENING ↗' : 'SUBSCRIBE'}
+            {subState === 'loading' ? '...' : subState === 'done' ? 'SUBSCRIBED ✓' : subState === 'error' ? 'TRY AGAIN' : 'SUBSCRIBE'}
           </button>
         </form>
       </div>
