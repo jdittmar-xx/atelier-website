@@ -1,40 +1,9 @@
 /* Portfolio design system loaded via App.jsx → portfolio.css */
 
-
-body {
-  background-color: #000000;
-  color: #8a8680;
-  font-family: 'Inter', system-ui, sans-serif;
-  font-weight: 300;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Monospace for all-caps labels */
-.mono-caps {
-  font-family: 'SF Mono', 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-weight: 300;
-  letter-spacing: -0.02em;
-}
-
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Selection color */
-::selection {
-  background-color: rgba(255, 255, 255, 0.08);
-  color: #ffffff;
-}
-
-/* Input autofill styling */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
@@ -43,138 +12,9 @@ input:-webkit-autofill:focus {
   transition: background-color 5000s ease-in-out 0s;
 }
 
-/* Subtle star pulse animation */
-@keyframes pulse {
-  0%, 100% {
-    opacity: 0.2;
-  }
-  50% {
-    opacity: 0.5;
-  }
-}
-
-.animate-pulse {
-  animation: pulse 4s ease-in-out infinite;
-}
-
-.delay-300 {
-  animation-delay: 300ms;
-}
-
-.delay-500 {
-  animation-delay: 500ms;
-}
-
-.delay-700 {
-  animation-delay: 700ms;
-}
-
-.delay-1000 {
-  animation-delay: 1000ms;
-}
-
-/* Subtle fade in for sections */
-section {
-  animation: fadeIn 0.8s ease-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Focus states */
-input:focus {
-  outline: none;
-}
-
-button:focus {
-  outline: none;
-}
-
-/* Link transitions */
-a {
-  transition: all 0.3s ease;
-}
-
-/* ─── Light mode ─────────────────────────────────────────── */
-html.light body {
-  background-color: #f5f0eb;
-  color: rgba(20, 18, 14, 0.7);
-}
-
-html.light .bg-black { background-color: #f5f0eb !important; }
-
-/* Subtle backgrounds */
-html.light .bg-white\/5       { background-color: rgba(20, 18, 14, 0.05) !important; }
-html.light .bg-white\/10      { background-color: rgba(20, 18, 14, 0.10) !important; }
-html.light .bg-white\/20      { background-color: rgba(20, 18, 14, 0.20) !important; }
-html.light .bg-white\/30      { background-color: rgba(20, 18, 14, 0.30) !important; }
-html.light .bg-white\/\[0\.03\] { background-color: rgba(20, 18, 14, 0.03) !important; }
-html.light .bg-white\/\[0\.05\] { background-color: rgba(20, 18, 14, 0.05) !important; }
-html.light .bg-white\/\[0\.06\] { background-color: rgba(20, 18, 14, 0.06) !important; }
-html.light .bg-white\/\[0\.08\] { background-color: rgba(20, 18, 14, 0.08) !important; }
-
-/* Text — boosted opacity so light-mode text is actually legible */
-html.light .text-white       { color: rgba(20, 18, 14, 0.95) !important; }
-html.light .text-white\/90   { color: rgba(20, 18, 14, 0.92) !important; }
-html.light .text-white\/80   { color: rgba(20, 18, 14, 0.88) !important; }
-html.light .text-white\/70   { color: rgba(20, 18, 14, 0.82) !important; }
-html.light .text-white\/60   { color: rgba(20, 18, 14, 0.75) !important; }
-html.light .text-white\/50   { color: rgba(20, 18, 14, 0.70) !important; }
-html.light .text-white\/40   { color: rgba(20, 18, 14, 0.65) !important; }
-html.light .text-white\/35   { color: rgba(20, 18, 14, 0.60) !important; }
-html.light .text-white\/30   { color: rgba(20, 18, 14, 0.58) !important; }
-html.light .text-white\/25   { color: rgba(20, 18, 14, 0.52) !important; }
-html.light .text-white\/20   { color: rgba(20, 18, 14, 0.45) !important; }
-html.light .text-white\/15   { color: rgba(20, 18, 14, 0.38) !important; }
-html.light .text-white\/10   { color: rgba(20, 18, 14, 0.30) !important; }
-
-/* Borders */
-html.light .border-white\/20 { border-color: rgba(20, 18, 14, 0.18) !important; }
-html.light .border-white\/10 { border-color: rgba(20, 18, 14, 0.12) !important; }
-html.light .border-white\/5  { border-color: rgba(20, 18, 14, 0.07) !important; }
-
-/* Hover backgrounds */
-html.light .hover\:bg-white\/\[0\.06\]:hover { background-color: rgba(20, 18, 14, 0.06) !important; }
-html.light .hover\:bg-white\/\[0\.08\]:hover { background-color: rgba(20, 18, 14, 0.08) !important; }
-
-/* Hover borders */
-html.light .hover\:border-white\/20:hover { border-color: rgba(20, 18, 14, 0.18) !important; }
-html.light .hover\:border-white\/10:hover { border-color: rgba(20, 18, 14, 0.12) !important; }
-
-/* Hover text */
-html.light .hover\:text-white\/80:hover { color: rgba(20, 18, 14, 0.92) !important; }
-html.light .hover\:text-white\/70:hover { color: rgba(20, 18, 14, 0.85) !important; }
-html.light .hover\:text-white\/50:hover { color: rgba(20, 18, 14, 0.75) !important; }
-
-/* Group-hover text */
-html.light .group:hover .group-hover\:text-white\/80 { color: rgba(20, 18, 14, 0.92) !important; }
-
-/* Input */
-html.light input {
-  color: rgba(20, 18, 14, 0.70) !important;
-  -webkit-text-fill-color: rgba(20, 18, 14, 0.70) !important;
-}
-html.light .placeholder\:text-white\/20::placeholder { color: rgba(20, 18, 14, 0.25) !important; }
-html.light input:-webkit-autofill,
-html.light input:-webkit-autofill:hover,
-html.light input:-webkit-autofill:focus {
+[data-theme="light"] input:-webkit-autofill,
+[data-theme="light"] input:-webkit-autofill:hover,
+[data-theme="light"] input:-webkit-autofill:focus {
   -webkit-text-fill-color: rgba(20, 18, 14, 0.70);
-  -webkit-box-shadow: 0 0 0px 1000px #f5f0eb inset;
+  -webkit-box-shadow: 0 0 0px 1000px #f4f1e9 inset;
 }
-
-/* Selection */
-html.light ::selection {
-  background-color: rgba(20, 18, 14, 0.08);
-  color: #1c1a0e;
-}
-
-/* Logo & images: invert white-on-transparent assets for light bg */
-html.light img { filter: invert(1); }

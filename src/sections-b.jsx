@@ -21,11 +21,10 @@ function StillCard({ s, span }) {
         position: 'absolute', left: 12, bottom: 12,
         fontSize: 9.5, color: '#f4f1e9', letterSpacing: '0.14em',
         padding: '4px 10px',
-        background: 'rgba(15,15,15,0.62)',
-        backdropFilter: 'blur(14px) saturate(1.3)',
-        WebkitBackdropFilter: 'blur(14px) saturate(1.3)',
-        borderRadius: 999, border: '1px solid rgba(255,255,255,0.12)',
-        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08)',
+        background: 'rgba(10,10,10,0.75)',
+        borderRadius: 999, border: '1px solid rgba(255,255,255,0.10)',
+        boxShadow: '0 2px 8px rgba(0,0,0,0.4)',
+        pointerEvents: 'none',
       }}>
         {s.caption}
       </figcaption>
@@ -410,19 +409,42 @@ export function Contact({ identity, overlays }) {
           {copied ? 'COPIED · ' : ''}{identity.email}
         </button>
 
-        <a href={'mailto:' + identity.email} style={{
+        <a href="#calendly" style={{
           padding: '18px 24px', color: 'var(--fg-1)', borderRadius: 999,
           fontFamily: 'JetBrains Mono, monospace', fontSize: 12, letterSpacing: '0.12em',
           textTransform: 'uppercase', cursor: 'pointer',
           display: 'inline-flex', alignItems: 'center', gap: 10,
-          border: '1px solid #c83a3a', background: '#c83a3a',
+          border: '1px solid var(--red)', background: 'var(--red)',
           transition: 'all 240ms var(--ease-cine)',
         }}
-        onMouseEnter={(e) => { e.currentTarget.style.background = '#7a2424'; e.currentTarget.style.borderColor = '#7a2424'; }}
-        onMouseLeave={(e) => { e.currentTarget.style.background = '#c83a3a'; e.currentTarget.style.borderColor = '#c83a3a'; }}>
+        onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.8'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.opacity = '1'; }}>
           BOOK A CALL
-          <span className="ms" style={{ fontSize: 16, fontVariationSettings: "'wght' 300" }}>arrow_outward</span>
+          <span className="ms" style={{ fontSize: 16, fontVariationSettings: "'wght' 300" }}>arrow_downward</span>
         </a>
+      </div>
+
+      {/* Calendly inline embed */}
+      <div id="calendly" style={{
+        marginTop: 72,
+        padding: 8,
+        background: 'rgba(18,18,18,0.55)',
+        backdropFilter: 'blur(28px) saturate(1.3)',
+        WebkitBackdropFilter: 'blur(28px) saturate(1.3)',
+        border: '1px solid rgba(255,255,255,0.08)',
+        borderRadius: 24,
+        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06), 0 16px 48px rgba(0,0,0,0.5)',
+        maxWidth: 900,
+        margin: '72px auto 0',
+      }}>
+        <iframe
+          src="https://calendly.com/jamie-dittmar/30min?hide_gdpr_banner=1&background_color=0c0c0c&text_color=e8eaec&primary_color=c83a3a"
+          width="100%"
+          height="700"
+          frameBorder="0"
+          title="Book a call"
+          style={{ borderRadius: 18, display: 'block', border: 0 }}
+        />
       </div>
 
       <div className="mono" style={{

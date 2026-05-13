@@ -104,18 +104,18 @@ export function FloatNav({ activeId, showLabels, theme = 'dark' }) {
       <div style={{
         display: 'flex', alignItems: 'center', gap: 4,
         padding: '8px 12px',
-        background: isLight ? 'rgba(255,250,240,0.62)' : 'rgba(20,20,20,0.55)',
+        background: isLight ? 'rgba(252,249,243,0.92)' : 'rgba(20,20,20,0.55)',
         backdropFilter: 'blur(28px) saturate(1.4)',
         WebkitBackdropFilter: 'blur(28px) saturate(1.4)',
-        border: '1px solid ' + (isLight ? 'rgba(0,0,0,0.10)' : 'rgba(255,255,255,0.08)'),
+        border: '1px solid ' + (isLight ? 'rgba(0,0,0,0.18)' : 'rgba(255,255,255,0.08)'),
         borderRadius: 999,
         boxShadow: isLight
-          ? 'inset 0 1px 0 rgba(255,255,255,0.7), 0 10px 28px rgba(20,18,12,0.12)'
+          ? 'inset 0 1px 0 rgba(255,255,255,0.9), 0 4px 6px rgba(20,18,12,0.06), 0 12px 32px rgba(20,18,12,0.16)'
           : 'inset 0 1px 0 rgba(255,255,255,0.06), 0 8px 24px rgba(0,0,0,0.5)',
       }}>
         {NAV_ITEMS.map((it) => {
           const active = activeId === it.id;
-          const activeBg = isLight ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.10)';
+          const activeBg = isLight ? 'rgba(0,0,0,0.09)' : 'rgba(255,255,255,0.10)';
           const href = it.external ? it.href : '#' + it.id;
           return (
             <a key={it.id} href={href} title={it.label}
