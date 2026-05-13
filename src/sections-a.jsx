@@ -330,18 +330,121 @@ export function Work({ films, overlays }) {
   );
 }
 
-export function Notes({ notes, overlays }) {
+function stripHtml(html) {
+  return html.replace(/<[^>]*>/g, '').replace(/&[a-z]+;/gi, ' ').trim();
+}
+
+function formatPubDate(str) {
+  try {
+    return new Date(str).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }).toUpperCase();
+  } catch { return ''; }
+}
+
+export function Notes({ notes: fallbackNotes, overlays }) {
   const isMobile = useMobile();
+  const [posts, setPosts] = useState(null);
+  const [email, setEmail] = useState('');
+  const [subState, setSubState] = useState('idle'); // idle | sent
+
+  useEffect(() => {
+    fetch('https://api.rss2json.com/v1/api.json?rss_url=https://dittmar.works/feed')
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.status === 'ok' && data.items?.length) {
+          setPosts(data.items.slice(0, 6).map((item, i) => ({
+            num: String(i + 1).padStart(2, '0'),
+            title: item.title,
+            date: formatPubDate(item.pubDate),
+            kind: item.categories?.[0]?.toUpperCase() || 'ESSAY',
+            runtime: null,
+            excerpt: stripHtml(item.description).slice(0, 220).trimEnd() + '…',
+            url: item.link,
+          })));
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const displayNotes = posts || fallbackNotes;
+
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    if (!email) return;
+    window.open(`https://dittmar.works/?email=${encodeURIComponent(email)}#subscribe`, '_blank');
+    setSubState('sent');
+    setTimeout(() => setSubState('idle'), 3000);
+  };
+
   return (
     <section id="writing" style={{ padding: isMobile ? '96px 20px 0' : '192px 48px 0', maxWidth: 1400, margin: '0 auto' }}>
       <SectionMark
         num="03" label="NOTES — WRITING"
         title="Small signals," italic="written down."
-        right={<>{notes.length} ENTRIES<br /><span style={{ color: 'var(--fg-1)' }}>2024 — 2026</span></>}
+        right={<>{displayNotes.length} ENTRIES<br /><a href="https://dittmar.works" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--fg-1)', textDecoration: 'none' }}>READ ON SUBSTACK ↗</a></>}
         overlays={overlays} />
       <div>
-        {notes.map((n) => <NoteCard key={n.num} note={n} />)}
+        {displayNotes.map((n) => <NoteCard key={n.num} note={n} />)}
         <div style={{ borderTop: '1px solid var(--ink-4)' }} />
+      </div>
+
+      {/* Newsletter signup */}
+      <div style={{
+        margin: '64px 0 0',
+        padding: isMobile ? '32px 24px' : '48px 56px',
+        background: 'var(--ink-1)',
+        border: '1px solid var(--ink-4)',
+        borderRadius: 16,
+        display: 'flex', flexDirection: isMobile ? 'column' : 'row',
+        alignItems: isMobile ? 'flex-start' : 'center',
+        gap: isMobile ? 24 : 48,
+      }}>
+        <div style={{ flex: 1 }}>
+          <div className="mono" style={{ fontSize: 10, color: 'var(--fg-4)', letterSpacing: '0.18em', marginBottom: 8 }}>
+            (DISPATCH · DITTMAR.WORKS)
+          </div>
+          <div className="serif" style={{
+            fontSize: isMobile ? 22 : 26, lineHeight: 1.1, letterSpacing: '-0.02em',
+            color: 'var(--fg-1)', marginBottom: 6,
+          }}>
+            Stay in the current.
+          </div>
+          <p style={{
+            margin: 0, fontFamily: 'SF Pro, sans-serif', fontSize: 14,
+            color: 'var(--fg-3)', lineHeight: 1.5, fontStyle: 'italic',
+          }}>
+            Essays on cinema, craft, and the work behind the work.
+          </p>
+        </div>
+        <form onSubmit={handleSubscribe} style={{
+          display: 'flex', gap: 8,
+          flexDirection: isMobile ? 'column' : 'row',
+          width: isMobile ? '100%' : 'auto',
+        }}>
+          <input
+            type="email" value={email} onChange={(e) => setEmail(e.target.value)}
+            placeholder="your@email.com" required
+            style={{
+              padding: '14px 18px',
+              background: 'var(--ink-2)', border: '1px solid var(--ink-4)',
+              borderRadius: 999, color: 'var(--fg-1)',
+              fontFamily: 'JetBrains Mono, monospace', fontSize: 12,
+              letterSpacing: '0.06em', outline: 'none', minWidth: 220,
+              width: isMobile ? '100%' : undefined,
+            }}
+          />
+          <button type="submit" style={{
+            padding: '14px 22px',
+            background: subState === 'sent' ? 'transparent' : 'var(--red)',
+            border: '1px solid var(--red)',
+            borderRadius: 999, color: 'var(--fg-1)', cursor: 'pointer',
+            fontFamily: 'JetBrains Mono, monospace', fontSize: 12,
+            letterSpacing: '0.1em', textTransform: 'uppercase',
+            transition: 'opacity 240ms var(--ease-cine)',
+            whiteSpace: 'nowrap',
+          }}>
+            {subState === 'sent' ? 'OPENING ↗' : 'SUBSCRIBE'}
+          </button>
+        </form>
       </div>
     </section>
   );
@@ -351,7 +454,10 @@ function NoteCard({ note }) {
   const [hover, setHover] = useState(false);
   const isMobile = useMobile();
   return (
-    <a href="#" onClick={(e) => e.preventDefault()}
+    <a href={note.url || '#'}
+       target={note.url ? '_blank' : undefined}
+       rel={note.url ? 'noopener noreferrer' : undefined}
+       onClick={note.url ? undefined : (e) => e.preventDefault()}
        onMouseEnter={() => setHover(true)}
        onMouseLeave={() => setHover(false)}
        style={{
