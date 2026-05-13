@@ -1,5 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
 
+export function useMobile(bp = 768) {
+  const [m, setM] = useState(() => window.innerWidth < bp);
+  useEffect(() => {
+    const h = () => setM(window.innerWidth < bp);
+    window.addEventListener('resize', h);
+    return () => window.removeEventListener('resize', h);
+  }, [bp]);
+  return m;
+}
+
 export function Wordmark({ size = 22, color }) {
   return (
     <span style={{
@@ -33,6 +43,7 @@ export function Grain({ opacity = 0.05 }) {
 
 export function TopBar({ identity, current, theme = 'dark', onToggleTheme }) {
   const isLight = theme === 'light';
+  const isMobile = useMobile();
   return (
     <div style={{
       position: 'fixed', left: 0, right: 0, top: 0, zIndex: 40,
@@ -55,11 +66,11 @@ export function TopBar({ identity, current, theme = 'dark', onToggleTheme }) {
         fontSize: 10.5, letterSpacing: '0.1em',
         color: 'var(--fg-3)'
       }}>
-        <span><span style={{ color: 'var(--red)' }}></span>  </span>
-        <span>{identity.location}</span>
-        <span style={{ color: current ? 'var(--fg-2)' : 'var(--fg-4)' }}>
+        {!isMobile && <span><span style={{ color: 'var(--red)' }}></span>  </span>}
+        {!isMobile && <span>{identity.location}</span>}
+        {!isMobile && <span style={{ color: current ? 'var(--fg-2)' : 'var(--fg-4)' }}>
           ({(current === 'REEL' ? 'HOME' : current) || 'INDEX'})
-        </span>
+        </span>}
         {onToggleTheme && (
           <button onClick={onToggleTheme} aria-label="Toggle theme" style={{
             width: 28, height: 28,
@@ -91,7 +102,7 @@ export const NAV_ITEMS = [
   { id: 'clients', icon: 'apartment',   label: 'CLIENTS' },
   { id: 'about',   icon: 'person',      label: 'STORY' },
   { id: 'contact', icon: 'mail',        label: 'CONTACT' },
-  { id: 'writing', icon: 'edit_note',   label: 'WRITING', href: 'https://dittmar.works', external: true },
+  { id: 'writing', icon: 'edit_note',   label: 'WRITING' },
 ];
 
 export function FloatNav({ activeId, showLabels, theme = 'dark' }) {
@@ -151,11 +162,12 @@ export function FloatNav({ activeId, showLabels, theme = 'dark' }) {
 
 export function Footer({ identity, theme = 'dark' }) {
   const isLight = theme === 'light';
+  const isMobile = useMobile();
   const year = '2026';
   return (
     <footer style={{
       marginTop: 192,
-      padding: '72px 48px 140px',
+      padding: isMobile ? '56px 24px 120px' : '72px 48px 140px',
       background: isLight ? 'rgba(244,241,233,0.62)' : 'rgba(12,12,12,0.50)',
       backdropFilter: 'blur(22px) saturate(1.4)',
       WebkitBackdropFilter: 'blur(22px) saturate(1.4)',
@@ -164,8 +176,8 @@ export function Footer({ identity, theme = 'dark' }) {
         ? 'inset 0 1px 0 rgba(255,255,255,0.55)'
         : 'inset 0 1px 0 rgba(255,255,255,0.05)',
       display: 'grid',
-      gridTemplateColumns: '1.4fr 1fr 1fr 1fr',
-      gap: 48,
+      gridTemplateColumns: isMobile ? '1fr 1fr' : '1.4fr 1fr 1fr 1fr',
+      gap: isMobile ? 32 : 48,
       fontFamily: 'JetBrains Mono, monospace',
       fontSize: 11,
       textTransform: 'uppercase',
@@ -225,14 +237,15 @@ export function Reveal({ children, delay = 0, as: Tag = 'div', style = {}, ...re
 }
 
 export function SectionMark({ num, label, title, italic, right, overlays = true }) {
+  const isMobile = useMobile();
   return (
     <div style={{
       position: 'relative',
       padding: '0 0 48px',
       borderBottom: '1px solid var(--ink-4)',
-      marginBottom: 64,
+      marginBottom: isMobile ? 40 : 64,
     }}>
-      {overlays && (
+      {overlays && !isMobile && (
         <div aria-hidden="true" style={{
           position: 'absolute', inset: 0, pointerEvents: 'none',
           backgroundImage: `
@@ -246,17 +259,18 @@ export function SectionMark({ num, label, title, italic, right, overlays = true 
 
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'auto 1fr auto',
+        gridTemplateColumns: isMobile ? 'auto 1fr' : 'auto 1fr auto',
         alignItems: 'end',
-        gap: 48,
+        gap: isMobile ? 16 : 48,
       }}>
         <div style={{ position: 'relative', display: 'flex', alignItems: 'baseline', gap: 16 }}>
           <span className="compressed" style={{
-            fontSize: 180, lineHeight: 0.78, color: 'var(--fg-1)',
+            fontSize: isMobile ? 'clamp(56px, 16vw, 96px)' : 180,
+            lineHeight: 0.78, color: 'var(--fg-1)',
             fontWeight: 400, letterSpacing: '-0.04em', display: 'inline-block',
             fontVariationSettings: "'wdth' 75",
           }}>{num}</span>
-          {overlays && (
+          {overlays && !isMobile && (
             <span className="mono" style={{
               position: 'absolute', top: -8, right: -22,
               fontSize: 9, color: 'var(--fg-4)', letterSpacing: '0.14em',
@@ -265,12 +279,12 @@ export function SectionMark({ num, label, title, italic, right, overlays = true 
         </div>
 
         <div>
-          <div className="mono" style={{ fontSize: 11, color: 'var(--fg-3)', marginBottom: 14 }}>
+          <div className="mono" style={{ fontSize: isMobile ? 10 : 11, color: 'var(--fg-3)', marginBottom: 14 }}>
             ({label})
           </div>
           <h2 className="serif" style={{
             margin: 0,
-            fontSize: 'clamp(40px, 5vw, 64px)',
+            fontSize: isMobile ? 'clamp(28px, 8vw, 48px)' : 'clamp(40px, 5vw, 64px)',
             lineHeight: 0.98, letterSpacing: '-0.025em',
             color: 'var(--fg-1)', textWrap: 'balance',
           }}>
@@ -278,12 +292,14 @@ export function SectionMark({ num, label, title, italic, right, overlays = true 
           </h2>
         </div>
 
-        <div className="mono" style={{
-          textAlign: 'right', fontSize: 10.5, color: 'var(--fg-3)',
-          lineHeight: 1.6, minWidth: 140,
-        }}>
-          {right}
-        </div>
+        {!isMobile && (
+          <div className="mono" style={{
+            textAlign: 'right', fontSize: 10.5, color: 'var(--fg-3)',
+            lineHeight: 1.6, minWidth: 140,
+          }}>
+            {right}
+          </div>
+        )}
       </div>
     </div>
   );

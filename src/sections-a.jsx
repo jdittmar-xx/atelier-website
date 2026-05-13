@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { SectionMark, Reveal } from './chrome.jsx';
+import { SectionMark, Reveal, useMobile } from './chrome.jsx';
 
 export function Hero({ tweaks, statement, identity }) {
   const variant = tweaks.heroVariant;
@@ -205,6 +205,7 @@ function Lightbox({ film, onClose }) {
 
 function WorkRow({ film, idx, hovered, setHovered, onOpen }) {
   const isHovered = hovered === idx;
+  const isMobile = useMobile();
   const hasLink = !!film.url;
   const embed = hasLink && resolveEmbed(film.url);
   const willLightbox = embed && embed.kind === 'iframe';
@@ -219,8 +220,8 @@ function WorkRow({ film, idx, hovered, setHovered, onOpen }) {
        onMouseEnter={() => setHovered(idx)}
        style={{
          display: 'grid',
-         gridTemplateColumns: '64px 1.6fr 1fr 140px 120px 120px 80px',
-         alignItems: 'center', gap: 24, padding: '28px 8px',
+         gridTemplateColumns: isMobile ? '44px 1fr 44px' : '64px 1.6fr 1fr 140px 120px 120px 80px',
+         alignItems: 'center', gap: isMobile ? 12 : 24, padding: '28px 8px',
          borderBottom: '1px solid var(--ink-4)',
          transition: 'background 240ms var(--ease-cine), color 240ms var(--ease-cine)',
          background: isHovered ? 'var(--ink-1)' : 'transparent',
@@ -244,18 +245,18 @@ function WorkRow({ film, idx, hovered, setHovered, onOpen }) {
         <div className="serif" style={{
           fontSize: 30, lineHeight: 1.05, color: 'var(--fg-1)', letterSpacing: '-0.015em',
         }}>{film.title}</div>
-        <div style={{
+        {!isMobile && <div style={{
           fontFamily: 'SF Pro, sans-serif', fontSize: 14, color: 'var(--fg-2)',
           marginTop: 4, lineHeight: 1.4, fontStyle: 'italic', maxWidth: 520,
-        }}>{film.logline}</div>
+        }}>{film.logline}</div>}
       </div>
 
-      <span className="mono" style={{ fontSize: 11, color: 'var(--fg-3)' }}>
+      {!isMobile && <span className="mono" style={{ fontSize: 11, color: 'var(--fg-3)' }}>
         {film.director}{film.client ? ' · ' + film.client : ''}
-      </span>
-      <span className="mono" style={{ fontSize: 11, color: 'var(--fg-3)' }}>{film.kind}</span>
-      <span className="mono" style={{ fontSize: 11, color: 'var(--fg-3)' }}>{film.format} · {film.runtime}</span>
-      <span className="mono" style={{ fontSize: 11, color: 'var(--fg-3)' }}>{film.aspect}</span>
+      </span>}
+      {!isMobile && <span className="mono" style={{ fontSize: 11, color: 'var(--fg-3)' }}>{film.kind}</span>}
+      {!isMobile && <span className="mono" style={{ fontSize: 11, color: 'var(--fg-3)' }}>{film.format} · {film.runtime}</span>}
+      {!isMobile && <span className="mono" style={{ fontSize: 11, color: 'var(--fg-3)' }}>{film.aspect}</span>}
       <span className="mono" style={{ fontSize: 11, color: isHovered ? 'var(--red)' : 'var(--fg-4)', textAlign: 'right' }}>
         {film.year}
       </span>
@@ -264,6 +265,7 @@ function WorkRow({ film, idx, hovered, setHovered, onOpen }) {
 }
 
 export function Work({ films, overlays }) {
+  const isMobile = useMobile();
   const [hovered, setHovered] = useState(null);
   const [filter, setFilter] = useState('ALL');
   const [openFilm, setOpenFilm] = useState(null);
@@ -271,7 +273,7 @@ export function Work({ films, overlays }) {
   const visible = filter === 'ALL' ? films : films.filter((f) => f.kind === filter);
 
   return (
-    <section id="work" style={{ padding: '160px 48px 0', maxWidth: 1600, margin: '0 auto', position: 'relative' }}>
+    <section id="work" style={{ padding: isMobile ? '96px 20px 0' : '160px 48px 0', maxWidth: 1600, margin: '0 auto', position: 'relative' }}>
       <SectionMark
         num="02" label="SELECTED VIDEOGRAPHY"
         title="Three years," italic="one obsession."
@@ -302,17 +304,17 @@ export function Work({ films, overlays }) {
 
       <div className="mono" style={{
         display: 'grid',
-        gridTemplateColumns: '64px 1.6fr 1fr 140px 120px 120px 80px',
-        gap: 24, padding: '0 8px 12px',
+        gridTemplateColumns: isMobile ? '44px 1fr 44px' : '64px 1.6fr 1fr 140px 120px 120px 80px',
+        gap: isMobile ? 12 : 24, padding: '0 8px 12px',
         fontSize: 10, color: 'var(--fg-4)', letterSpacing: '0.14em',
         borderBottom: '1px solid var(--ink-4)',
       }}>
         <span>NO.</span>
         <span>TITLE</span>
-        <span>DIRECTOR · CLIENT</span>
-        <span>KIND</span>
-        <span>FORMAT · RUN</span>
-        <span>ASPECT</span>
+        {!isMobile && <span>DIRECTOR · CLIENT</span>}
+        {!isMobile && <span>KIND</span>}
+        {!isMobile && <span>FORMAT · RUN</span>}
+        {!isMobile && <span>ASPECT</span>}
         <span style={{ textAlign: 'right' }}>YEAR</span>
       </div>
 
@@ -329,8 +331,9 @@ export function Work({ films, overlays }) {
 }
 
 export function Notes({ notes, overlays }) {
+  const isMobile = useMobile();
   return (
-    <section id="notes" style={{ padding: '192px 48px 0', maxWidth: 1400, margin: '0 auto' }}>
+    <section id="writing" style={{ padding: isMobile ? '96px 20px 0' : '192px 48px 0', maxWidth: 1400, margin: '0 auto' }}>
       <SectionMark
         num="03" label="NOTES — WRITING"
         title="Small signals," italic="written down."
@@ -346,6 +349,7 @@ export function Notes({ notes, overlays }) {
 
 function NoteCard({ note }) {
   const [hover, setHover] = useState(false);
+  const isMobile = useMobile();
   return (
     <a href="#" onClick={(e) => e.preventDefault()}
        onMouseEnter={() => setHover(true)}
@@ -355,35 +359,56 @@ function NoteCard({ note }) {
          borderTop: '1px solid var(--ink-4)',
          position: 'relative', cursor: 'pointer',
        }}>
-      <div style={{
-        display: 'grid', gridTemplateColumns: '80px 1fr 1fr 100px',
-        gap: 32, alignItems: 'start',
-      }}>
-        <span className="mono" style={{ fontSize: 11, color: 'var(--fg-3)', letterSpacing: '0.12em' }}>
-          NO. {note.num}
-        </span>
-        <div>
+      {isMobile ? (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <span className="mono" style={{ fontSize: 10, color: 'var(--fg-4)', letterSpacing: '0.12em' }}>
+            NO. {note.num} · {note.kind} · {note.date}
+          </span>
           <div className="serif" style={{
-            fontSize: 36, lineHeight: 1.0, color: 'var(--fg-1)', letterSpacing: '-0.02em', marginBottom: 8,
+            fontSize: 28, lineHeight: 1.05, color: 'var(--fg-1)', letterSpacing: '-0.02em',
           }}>{note.title}</div>
-          <div className="mono" style={{ fontSize: 10.5, color: 'var(--fg-4)', letterSpacing: '0.12em' }}>
-            {note.kind} · {note.date} · {note.runtime}
-          </div>
-        </div>
-        <p style={{
-          margin: 0, fontFamily: 'SF Pro, sans-serif', fontSize: 15, lineHeight: 1.55,
-          color: 'var(--fg-2)', fontStyle: 'italic', textWrap: 'pretty',
-        }}>{note.excerpt}</p>
-        <div style={{ textAlign: 'right' }}>
+          <p style={{
+            margin: 0, fontFamily: 'SF Pro, sans-serif', fontSize: 14, lineHeight: 1.5,
+            color: 'var(--fg-2)', fontStyle: 'italic',
+          }}>{note.excerpt}</p>
           <span className="mono" style={{
-            fontSize: 11, color: hover ? 'var(--red)' : 'var(--fg-3)',
-            letterSpacing: '0.12em', display: 'inline-flex', alignItems: 'center', gap: 6,
-            transition: 'color 240ms var(--ease-cine)',
+            fontSize: 11, color: hover ? 'var(--red)' : 'var(--fg-3)', letterSpacing: '0.12em',
+            display: 'inline-flex', alignItems: 'center', gap: 6,
           }}>
             READ <span className="ms" style={{ fontSize: 14, fontVariationSettings: "'wght' 300" }}>arrow_outward</span>
           </span>
         </div>
-      </div>
+      ) : (
+        <div style={{
+          display: 'grid', gridTemplateColumns: '80px 1fr 1fr 100px',
+          gap: 32, alignItems: 'start',
+        }}>
+          <span className="mono" style={{ fontSize: 11, color: 'var(--fg-3)', letterSpacing: '0.12em' }}>
+            NO. {note.num}
+          </span>
+          <div>
+            <div className="serif" style={{
+              fontSize: 36, lineHeight: 1.0, color: 'var(--fg-1)', letterSpacing: '-0.02em', marginBottom: 8,
+            }}>{note.title}</div>
+            <div className="mono" style={{ fontSize: 10.5, color: 'var(--fg-4)', letterSpacing: '0.12em' }}>
+              {note.kind} · {note.date} · {note.runtime}
+            </div>
+          </div>
+          <p style={{
+            margin: 0, fontFamily: 'SF Pro, sans-serif', fontSize: 15, lineHeight: 1.55,
+            color: 'var(--fg-2)', fontStyle: 'italic', textWrap: 'pretty',
+          }}>{note.excerpt}</p>
+          <div style={{ textAlign: 'right' }}>
+            <span className="mono" style={{
+              fontSize: 11, color: hover ? 'var(--red)' : 'var(--fg-3)',
+              letterSpacing: '0.12em', display: 'inline-flex', alignItems: 'center', gap: 6,
+              transition: 'color 240ms var(--ease-cine)',
+            }}>
+              READ <span className="ms" style={{ fontSize: 14, fontVariationSettings: "'wght' 300" }}>arrow_outward</span>
+            </span>
+          </div>
+        </div>
+      )}
     </a>
   );
 }

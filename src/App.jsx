@@ -74,6 +74,7 @@ export default function App() {
       <main>
         <Hero tweaks={t} statement={statement} identity={data.identity} />
         <Reveal><Work films={data.films} overlays={t.overlays} /></Reveal>
+        <Reveal><Notes notes={data.notes} overlays={t.overlays} /></Reveal>
         <Reveal><Stills stills={data.stills} overlays={t.overlays} /></Reveal>
         <Reveal><Clients clients={data.clients} overlays={t.overlays} /></Reveal>
         <Reveal><About about={data.about} overlays={t.overlays} /></Reveal>
