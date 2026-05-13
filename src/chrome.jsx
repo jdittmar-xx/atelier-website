@@ -98,11 +98,11 @@ export function TopBar({ identity, current, theme = 'dark', onToggleTheme }) {
 export const NAV_ITEMS = [
   { id: 'reel',    icon: 'play_arrow',  label: 'REEL' },
   { id: 'work',    icon: 'collections', label: 'WORK' },
+  { id: 'writing', icon: 'edit_note',   label: 'WRITING' },
   { id: 'stills',  icon: 'image',       label: 'STILLS' },
   { id: 'clients', icon: 'apartment',   label: 'CLIENTS' },
   { id: 'about',   icon: 'person',      label: 'STORY' },
   { id: 'contact', icon: 'mail',        label: 'CONTACT' },
-  { id: 'writing', icon: 'edit_note',   label: 'WRITING' },
 ];
 
 export function FloatNav({ activeId, showLabels, theme = 'dark' }) {
