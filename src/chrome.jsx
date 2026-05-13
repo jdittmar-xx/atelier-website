@@ -92,7 +92,6 @@ export const NAV_ITEMS = [
   { id: 'about',   icon: 'person',      label: 'STORY' },
   { id: 'contact', icon: 'mail',        label: 'CONTACT' },
   { id: 'writing', icon: 'edit_note',   label: 'WRITING', href: 'https://dittmar.works', external: true },
-  { id: 'app',     icon: 'language',    label: 'ATELIER', href: '/app', external: false },
 ];
 
 export function FloatNav({ activeId, showLabels, theme = 'dark' }) {
