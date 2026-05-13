@@ -1,4 +1,5 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import { SectionMark } from './chrome.jsx';
 
 function StillCard({ s, span }) {
@@ -363,6 +364,8 @@ export function About({ about, overlays }) {
 
 export function Contact({ identity, overlays }) {
   const [copied, setCopied] = useState(false);
+  const [calendlyOpen, setCalendlyOpen] = useState(false);
+
   const copyEmail = useCallback(() => {
     try {
       navigator.clipboard.writeText(identity.email);
@@ -372,6 +375,17 @@ export function Contact({ identity, overlays }) {
       window.location.href = 'mailto:' + identity.email;
     }
   }, [identity.email]);
+
+  useEffect(() => {
+    if (!calendlyOpen) return;
+    const onKey = (e) => { if (e.key === 'Escape') setCalendlyOpen(false); };
+    window.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [calendlyOpen]);
 
   return (
     <section id="contact" style={{
@@ -409,43 +423,72 @@ export function Contact({ identity, overlays }) {
           {copied ? 'COPIED · ' : ''}{identity.email}
         </button>
 
-        <a href="#calendly" style={{
+        <button onClick={() => setCalendlyOpen(true)} style={{
           padding: '18px 24px', color: 'var(--fg-1)', borderRadius: 999,
           fontFamily: 'JetBrains Mono, monospace', fontSize: 12, letterSpacing: '0.12em',
           textTransform: 'uppercase', cursor: 'pointer',
           display: 'inline-flex', alignItems: 'center', gap: 10,
           border: '1px solid var(--red)', background: 'var(--red)',
-          transition: 'all 240ms var(--ease-cine)',
+          transition: 'opacity 240ms var(--ease-cine)',
         }}
         onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.8'; }}
         onMouseLeave={(e) => { e.currentTarget.style.opacity = '1'; }}>
           BOOK A CALL
-          <span className="ms" style={{ fontSize: 16, fontVariationSettings: "'wght' 300" }}>arrow_downward</span>
-        </a>
+          <span className="ms" style={{ fontSize: 16, fontVariationSettings: "'wght' 300" }}>calendar_month</span>
+        </button>
       </div>
 
-      {/* Calendly inline embed */}
-      <div id="calendly" style={{
-        marginTop: 72,
-        padding: 8,
-        background: 'rgba(18,18,18,0.55)',
-        backdropFilter: 'blur(28px) saturate(1.3)',
-        WebkitBackdropFilter: 'blur(28px) saturate(1.3)',
-        border: '1px solid rgba(255,255,255,0.08)',
-        borderRadius: 24,
-        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06), 0 16px 48px rgba(0,0,0,0.5)',
-        maxWidth: 900,
-        margin: '72px auto 0',
-      }}>
-        <iframe
-          src="https://calendly.com/jamie-dittmar/30min?hide_gdpr_banner=1&background_color=0c0c0c&text_color=e8eaec&primary_color=c83a3a"
-          width="100%"
-          height="700"
-          frameBorder="0"
-          title="Book a call"
-          style={{ borderRadius: 18, display: 'block', border: 0 }}
-        />
-      </div>
+      {/* Calendly modal */}
+      {calendlyOpen && ReactDOM.createPortal(
+        <div onClick={() => setCalendlyOpen(false)} style={{
+          position: 'fixed', inset: 0, zIndex: 200,
+          background: 'rgba(0,0,0,0.72)',
+          backdropFilter: 'blur(18px) saturate(0.9)',
+          WebkitBackdropFilter: 'blur(18px) saturate(0.9)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          padding: 32,
+        }}>
+          {/* close button */}
+          <button onClick={() => setCalendlyOpen(false)} aria-label="Close" style={{
+            position: 'absolute', top: 24, right: 24,
+            width: 48, height: 48,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            background: 'rgba(20,20,20,0.55)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            border: '1px solid rgba(255,255,255,0.12)',
+            boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08)',
+            color: 'var(--fg-1)', cursor: 'pointer', borderRadius: 999,
+            transition: 'transform 200ms var(--ease-cine)',
+          }}
+          onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.08)'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; }}>
+            <span className="ms" style={{ fontSize: 22, fontVariationSettings: "'wght' 300" }}>close</span>
+          </button>
+
+          {/* glass card */}
+          <div onClick={(e) => e.stopPropagation()} style={{
+            padding: 8,
+            background: 'rgba(18,18,18,0.60)',
+            backdropFilter: 'blur(32px) saturate(1.3)',
+            WebkitBackdropFilter: 'blur(32px) saturate(1.3)',
+            border: '1px solid rgba(255,255,255,0.10)',
+            borderRadius: 24,
+            boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06), 0 32px 80px rgba(0,0,0,0.7)',
+            width: '100%', maxWidth: 900,
+          }}>
+            <iframe
+              src="https://calendly.com/jamie-dittmar/30min?hide_gdpr_banner=1&background_color=0c0c0c&text_color=e8eaec&primary_color=c83a3a"
+              width="100%"
+              height="660"
+              frameBorder="0"
+              title="Book a call"
+              style={{ borderRadius: 18, display: 'block', border: 0 }}
+            />
+          </div>
+        </div>,
+        document.body
+      )}
 
       <div className="mono" style={{
         marginTop: 80, display: 'flex', justifyContent: 'center', gap: 48,
