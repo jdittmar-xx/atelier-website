@@ -92,6 +92,7 @@ export const NAV_ITEMS = [
   { id: 'about',   icon: 'person',      label: 'STORY' },
   { id: 'contact', icon: 'mail',        label: 'CONTACT' },
   { id: 'writing', icon: 'edit_note',   label: 'WRITING', href: 'https://dittmar.works', external: true },
+  { id: 'app',     icon: 'language',    label: 'ATELIER', href: '/app', external: false },
 ];
 
 export function FloatNav({ activeId, showLabels, theme = 'dark' }) {
@@ -116,7 +117,7 @@ export function FloatNav({ activeId, showLabels, theme = 'dark' }) {
         {NAV_ITEMS.map((it) => {
           const active = activeId === it.id;
           const activeBg = isLight ? 'rgba(0,0,0,0.09)' : 'rgba(255,255,255,0.10)';
-          const href = it.external ? it.href : '#' + it.id;
+          const href = it.href ? it.href : '#' + it.id;
           return (
             <a key={it.id} href={href} title={it.label}
                target={it.external ? '_blank' : undefined}

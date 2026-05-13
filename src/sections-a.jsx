@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { SectionMark, Reveal } from './chrome.jsx';
 
@@ -203,7 +203,7 @@ function Lightbox({ film, onClose }) {
   ), document.body);
 }
 
-function WorkRow({ film, idx, hovered, setHovered, onTrack, onOpen }) {
+function WorkRow({ film, idx, hovered, setHovered, onOpen }) {
   const isHovered = hovered === idx;
   const hasLink = !!film.url;
   const embed = hasLink && resolveEmbed(film.url);
@@ -216,8 +216,7 @@ function WorkRow({ film, idx, hovered, setHovered, onTrack, onOpen }) {
          if (!hasLink) { e.preventDefault(); return; }
          if (willLightbox) { e.preventDefault(); onOpen(film); }
        }}
-       onMouseEnter={(e) => { setHovered(idx); onTrack(e); }}
-       onMouseMove={onTrack}
+       onMouseEnter={() => setHovered(idx)}
        style={{
          display: 'grid',
          gridTemplateColumns: '64px 1.6fr 1fr 140px 120px 120px 80px',
@@ -268,25 +267,8 @@ export function Work({ films, overlays }) {
   const [hovered, setHovered] = useState(null);
   const [filter, setFilter] = useState('ALL');
   const [openFilm, setOpenFilm] = useState(null);
-  const previewRef = useRef(null);
   const kinds = ['ALL', ...Array.from(new Set(films.map((f) => f.kind)))];
   const visible = filter === 'ALL' ? films : films.filter((f) => f.kind === filter);
-  const hoveredFilm = hovered != null ? visible[hovered] : null;
-
-  const PREVIEW_W = 360;
-  const PREVIEW_H = 220;
-  const MARGIN = 24;
-  const onTrack = (e) => {
-    const el = previewRef.current;
-    if (!el) return;
-    let x = e.clientX + 20;
-    let y = e.clientY + 20;
-    if (x + PREVIEW_W + MARGIN > window.innerWidth) x = e.clientX - PREVIEW_W - 20;
-    if (y + PREVIEW_H + MARGIN > window.innerHeight) y = e.clientY - PREVIEW_H - 20;
-    x = Math.max(MARGIN, Math.min(window.innerWidth - PREVIEW_W - MARGIN, x));
-    y = Math.max(MARGIN, Math.min(window.innerHeight - PREVIEW_H - MARGIN, y));
-    el.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-  };
 
   return (
     <section id="work" style={{ padding: '160px 48px 0', maxWidth: 1600, margin: '0 auto', position: 'relative' }}>
@@ -337,38 +319,9 @@ export function Work({ films, overlays }) {
       <div onMouseLeave={() => setHovered(null)}>
         {visible.map((f, i) => (
           <WorkRow key={f.num} film={f} idx={i} hovered={hovered}
-            setHovered={setHovered} onTrack={onTrack} onOpen={setOpenFilm} />
+            setHovered={setHovered} onOpen={setOpenFilm} />
         ))}
       </div>
-
-      {/* Floating preview thumbnail */}
-      {hoveredFilm && (
-        <div ref={previewRef} style={{
-          position: 'fixed', top: 0, left: 0, zIndex: 60,
-          width: 360, height: 220,
-          pointerEvents: 'none',
-          borderRadius: 8, overflow: 'hidden',
-          border: '1px solid rgba(255,255,255,0.10)',
-          boxShadow: '0 12px 40px rgba(0,0,0,0.65)',
-          background: '#000',
-          willChange: 'transform',
-        }}>
-          <div style={{
-            position: 'absolute', inset: 0,
-            backgroundImage: `url(${hoveredFilm.still})`,
-            backgroundSize: 'cover', backgroundPosition: 'center',
-            filter: 'brightness(0.85) contrast(1.04)',
-          }} />
-          <div className="mono" style={{
-            position: 'absolute', bottom: 12, left: 12, right: 12,
-            display: 'flex', justifyContent: 'space-between',
-            fontSize: 9.5, color: '#f4f1e9', letterSpacing: '0.12em',
-          }}>
-            <span>{hoveredFilm.num} · {hoveredFilm.title.toUpperCase()}</span>
-            <span>{hoveredFilm.year}</span>
-          </div>
-        </div>
-      )}
 
       <Lightbox film={openFilm} onClose={() => setOpenFilm(null)} />
     </section>
