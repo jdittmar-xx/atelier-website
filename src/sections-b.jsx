@@ -6,8 +6,9 @@ function StillCard({ s, span, isMobile }) {
   return (
     <figure style={{
       margin: 0,
-      gridColumn: isMobile ? 'span 1' : `span ${span.c}`,
-      gridRow: isMobile ? 'span 1' : `span ${span.r}`,
+      gridColumn: isMobile ? undefined : `span ${span.c}`,
+      gridRow: isMobile ? undefined : `span ${span.r}`,
+      aspectRatio: isMobile ? s.aspect : undefined,
       position: 'relative', overflow: 'hidden',
       background: '#000', border: '1px solid var(--ink-3)',
     }}>
@@ -85,8 +86,11 @@ export function Stills({ stills, overlays }) {
       </div>
 
       <div style={{
-        display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(12, 1fr)',
-        gridAutoRows: isMobile ? '140px' : '110px', gap: isMobile ? 8 : 12,
+        display: isMobile ? 'flex' : 'grid',
+        flexDirection: isMobile ? 'column' : undefined,
+        gridTemplateColumns: isMobile ? undefined : 'repeat(12, 1fr)',
+        gridAutoRows: isMobile ? undefined : '110px',
+        gap: isMobile ? 8 : 12,
       }}>
         {visible.map((s, i) => (
           <StillCard key={s.src} s={s} span={STILLS_LAYOUT[i % STILLS_LAYOUT.length]} isMobile={isMobile} />

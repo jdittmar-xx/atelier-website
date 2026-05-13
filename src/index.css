@@ -1,7 +1,8 @@
 /* Portfolio design system loaded via App.jsx → portfolio.css */
 
-html {
+html, body {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 input:-webkit-autofill,
