@@ -147,7 +147,7 @@ const PORTFOLIO = {
     portrait: '/stills/portrait-dittmar.jpg',
     lead: "Our best work happens when we’re living in our true design.",
     who: [
-      'I craft stories for high-trust, authentic, elite brands.',
+      'I craft stories for high-trust, elite brands.',
       'I build emergent tools for thinking.',
       'I live in the collision of cinematography, writing, design & high performance (fitness, cars, community).',
       'I love ideas, writing, cars, coffee, running, bodybuilding, calisthenics, climbing, racing, calligraphy, design.',
@@ -171,6 +171,7 @@ const PORTFOLIO = {
     ],
     tenets: [
       'Infinite optionality destroys clarity. Constraint is power, consciously chosen.',
+      'Taste is the ultimate differentiator.',
       'The best ideas emerge in the margins. Leave room for them.',
       'Systems emerge from execution, not the other way around. Learn by building.',
       'Research over opinion. Taste plus data, a unique orchestrative power.',
