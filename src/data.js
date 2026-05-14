@@ -176,7 +176,8 @@ const PORTFOLIO = {
       'Systems emerge from execution, not the other way around. Learn by building.',
       'Research over opinion. Taste plus data, a unique orchestrative power.',
       'Remove everything until only the essence remains. The creator is the filter.',
-      'Whoever delivers clarity and simplicity runs the world. Disdain for mediocrity; respect for the work.',
+      'Whoever delivers clarity and simplicity runs the world.',
+      'Reject mediocrity, honor the work.',
     ],
     stats: [
       { v: '14', l: 'SELECTED FILMS' },
